@@ -1,0 +1,27 @@
+﻿<template>
+    <lightning-card title="Enterprise Dynamic Data Grid Engine" icon-name="standard:multi_select_panels">
+        <div class="slds-var-m-around_medium">
+            <lightning-input 
+                type="search" 
+                onchange={handleFilterChange} 
+                class="slds-var-m-bottom_small" 
+                label="Advanced Omnibox Data Filter" 
+                placeholder="Type keywords across any cell matrix column to instantly filter..."></lightning-input>
+
+            <template if:true={isLoading}>
+                <lightning-spinner alt="Running Schema Descriptors..."></lightning-spinner>
+            </template>
+
+            <template if:false={isLoading}>
+                <div style="height: 350px;">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={filteredRecords}
+                        columns={columns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
