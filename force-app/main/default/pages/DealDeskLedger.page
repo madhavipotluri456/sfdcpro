@@ -1,0 +1,27 @@
+﻿<apex:page controller="DealDeskRemotingProvider" lightningStylesheets="true">
+    <div style="padding: 20px;">
+        <h2>Deal-Desk Transaction Optimization Console</h2>
+        <p>Bypassing standard View-State constraints using asynchronous JavaScript Remoting Engine arrays.</p>
+        <button type="button" onclick="loadLedgerMatrix();" style="padding: 6px 12px; background:#0070d2; color:#fff; border:none; border-radius:4px; cursor:pointer;">Initialize Pipeline Matrix</button>
+        <div id="ledgerLogPortal" style="margin-top: 15px; font-family: monospace; background:#f3f2f1; padding: 10px; border-radius:4px;">
+            [System Log: Matrix Pipeline Offline]
+        </div>
+    </div>
+    <script type="text/javascript">
+        function loadLedgerMatrix() {
+            var logBlock = document.getElementById('ledgerLogPortal');
+            logBlock.innerHTML = 'Executing Fluent ORM Compilation... Streaming packets...';
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.DealDeskRemotingProvider.fetchLedgerData}',
+                function(result, event) {
+                    if (event.status) {
+                        logBlock.innerHTML = '<strong>Data Ingest Success! Active Row count: ' + result.length + '</strong><br/><br/>' + JSON.stringify(result[0]);
+                    } else {
+                        logBlock.innerHTML = 'Error: ' + event.message;
+                    }
+                },
+                { escape: true }
+            );
+        }
+    </script>
+</apex:page>
