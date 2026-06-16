@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <assignments>
+        <name>Sanitize_Lead_Data_Assignment</name>
+        <label>Sanitize Lead Data Assignment</label>
+        <locationX>176</locationX>
+        <locationY>287</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Company</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>REDACTED COMPLIANCE CORP</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <interviewLabel>Before-Save Lead Sanitizer Engine {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Before-Save Lead Sanitizer Engine</label>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onCreateOnly</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Sanitize_Lead_Data_Assignment</targetReference>
+        </connector>
+        <object>Lead</object>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
