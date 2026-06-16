@@ -1,0 +1,24 @@
+﻿<template>
+    <lightning-card title="Bypass Cloud Storage: AWS S3 Stream Engine" icon-name="utility:upload">
+        <div class="slds-var-m-around_medium">
+            <p class="slds-var-m-bottom_small">Stream files directly to AWS S3 bucket to bypass native platform storage governor limits.</p>
+            
+            <lightning-input 
+                type="file" 
+                label="Choose Local Asset File" 
+                onchange={handleFileSelection}></lightning-input>
+            
+            <div class="slds-var-m-top_medium slds-var-m-bottom_medium">
+                <lightning-button 
+                    label="Stream to S3 Storage" 
+                    variant="brand" 
+                    onclick={handleUploadExecute}
+                    disabled={disabledCheck}></lightning-button>
+            </div>
+
+            <div class="slds-text-title_bold slds-text-color_weak">
+                {uploadStatusMessage}
+            </div>
+        </div>
+    </lightning-card>
+</template>
