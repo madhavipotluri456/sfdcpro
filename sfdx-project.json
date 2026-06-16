@@ -1,0 +1,24 @@
+﻿{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    },
+    {
+      "path": "force-di-framework",
+      "default": false
+    },
+    {
+      "path": "force-payment-gateway",
+      "default": false
+    },
+    {
+      "path": "force-s3-integration",
+      "default": false
+    }
+  ],
+  "name": "Senior-Salesforce-Projects",
+  "namespace": "",
+  "sfdxversion": "57.0",
+  "sourceApiVersion": "60.0"
+}
