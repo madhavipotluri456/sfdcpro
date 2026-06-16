@@ -1,0 +1,31 @@
+﻿<apex:page controller="RemotingDashboardController" lightningStylesheets="true">
+    <div style="padding: 20px; font-family: sans-serif;">
+        <h2>Viewstate-Bypassing Async Aggregation Engine</h2>
+        <p>This UI utilizes Visualforce JavaScript Remoting to stream serialized data points directly from Apex runtime heaps without loading page views states.</p>
+        <button type="button" onclick="executeDataStreamFetch();" class="btn" style="padding: 8px 16px; background: #0070d2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Fetch Aggregate Statistics
+        </button>
+        <div id="outputLogMatrix" style="margin-top: 20px; padding: 15px; background: #f3f2f1; border-radius: 4px; font-family: monospace;">
+            [System State: Awaiting manual telemetry stream request...]
+        </div>
+    </div>
+    <script type="text/javascript">
+        function executeDataStreamFetch() {
+            var displayConsole = document.getElementById('outputLogMatrix');
+            displayConsole.innerHTML = 'Streaming real-time records from Apex Controller...';
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.RemotingDashboardController.getIndustryAggregationMetrics}',
+                function(result, event) {
+                    if (event.status) {
+                        displayConsole.innerHTML = '<strong>Data Packet Stream Received Successfully:</strong><br/><br/>' + JSON.stringify(result, null, 4);
+                    } else if (event.type === 'exception') {
+                        displayConsole.innerHTML = 'Fatal Remoting Gateway Exception: ' + event.message;
+                    } else {
+                        displayConsole.innerHTML = 'Generic Stream Error Occurred: ' + event.message;
+                    }
+                }, 
+                { escape: true }
+            );
+        }
+    </script>
+</apex:page>

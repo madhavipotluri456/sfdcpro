@@ -1,0 +1,64 @@
+﻿<apex:page standardController="Account" extensions="InvoicePDFController" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" showHeader="false" sidebar="false">
+    <html>
+        <head>
+            <style type="text/css">
+                @page { size: letter; margin: 0.5in; @bottom-right { content: "Page " counter(page) " of " counter(pages); font-family: 'Arial', sans-serif; font-size: 9pt; } }
+                body { font-family: 'Arial', sans-serif; color: #333; line-height: 1.4; }
+                .invoice-header { border-bottom: 3px solid #005fb2; padding-bottom: 10px; margin-bottom: 30px; }
+                .company-title { font-size: 28pt; font-weight: bold; color: #005fb2; }
+                .details-table { width: 100%; margin-bottom: 30px; border-collapse: collapse; }
+                .details-table td { padding: 8px; vertical-align: top; }
+                .data-grid { width: 100%; border-collapse: collapse; }
+                .data-grid th { background-color: #005fb2; color: white; padding: 10px; text-align: left; font-size: 11pt; }
+                .data-grid td { padding: 10px; border-bottom: 1px solid #dddddd; font-size: 10pt; }
+            </style>
+        </head>
+        <body>
+            <div class="invoice-header">
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="company-title">ENTERPRISE INVOICE</td>
+                        <td style="text-align: right; font-size: 10pt;">
+                            <strong>Generation Date:</strong> {!generatedDate}<br/>
+                            <strong>Account Ref #:</strong> {!targetAccount.AccountNumber}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table class="details-table">
+                <tr>
+                    <td style="width: 50%;">
+                        <strong>Bill To:</strong><br/>
+                        {!targetAccount.Name}<br/>
+                        {!targetAccount.ShippingStreet}<br/>
+                        {!targetAccount.ShippingCity}, {!targetAccount.ShippingState} {!targetAccount.ShippingPostalCode}
+                    </td>
+                    <td style="width: 50%; text-align: right;">
+                        <strong>Corporate Origin:</strong><br/>
+                        Global Logistics Vault Ltd.<br/>
+                        100 Salesforce Tower Way<br/>
+                        San Francisco, CA, 94105
+                    </td>
+                </tr>
+            </table>
+            <table class="data-grid">
+                <thead>
+                    <tr>
+                        <th>Line Asset Description</th>
+                        <th>Industry Classification</th>
+                        <th>Operational Risk Segment</th>
+                        <th>Corporate Routing Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{!targetAccount.Name} Primary Framework Contract</td>
+                        <td>{!targetAccount.Industry}</td>
+                        <td>{!targetAccount.Rating} Tier Allocation</td>
+                        <td>{!targetAccount.Phone}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>

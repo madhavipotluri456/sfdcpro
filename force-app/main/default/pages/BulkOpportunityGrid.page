@@ -1,0 +1,25 @@
+﻿<apex:page controller="BulkOpportunityController" docType="html-5.0" lightningStylesheets="true">
+    <apex:sectionHeader title="Corporate Deal Desk" subtitle="Mass-Edit Transaction Optimization Matrix" />
+    <apex:pageMessages id="feedbackNotification" />
+    <apex:form id="matrixForm">
+        <apex:pageBlock title="Active Pipeline Allocation Chunks">
+            <apex:pageBlockButtons>
+                <apex:commandButton action="{!saveChanges}" value="Commit Bulk Changes" reRender="feedbackNotification, matrixForm" styleClass="slds-button slds-button_brand"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!recordList}" var="opp">
+                <apex:column headerValue="Opportunity Name Pipeline Path">
+                    <apex:inputField value="{!opp.Name}" style="width: 250px; font-weight: bold;"/>
+                </apex:column>
+                <apex:column headerValue="Stage Context Step">
+                    <apex:inputField value="{!opp.StageName}" />
+                </apex:column>
+                <apex:column headerValue="Financial Deal Volume">
+                    <apex:inputField value="{!opp.Amount}" />
+                </apex:column>
+                <apex:column headerValue="Target Milestone Close Date">
+                    <apex:inputField value="{!opp.CloseDate}" />
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
